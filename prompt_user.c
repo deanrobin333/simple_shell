@@ -5,6 +5,13 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 
+/**
+ * prompt_user - prompts the user for a command
+ * @argv: pointer to command line arguments
+ * @envp: pointer to environment paths
+ * Return: returns void. it starts our simple shell to take in one argument
+ */
+
 void prompt_user(char *argv[], char *envp[])
 {
 	char *command_ptr = NULL;
