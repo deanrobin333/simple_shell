@@ -35,8 +35,10 @@ void prompt_user(char *argv[], char *envp[])
 		for (i = 0; command_ptr[i] != '\0'; i++)
 		{
 			if (command_ptr[i] == '\n')
-				command_ptr[i] = 0;
+				command_ptr[i] = '\0';
 		}
+		if (*command_ptr != '\0') 
+		{
 		execve_argv[0] = strtok(command_ptr, " ");
 		for (i = 0; execve_argv[i] != NULL;)
 			execve_argv[++i] = strtok(NULL, " ");
@@ -53,6 +55,7 @@ void prompt_user(char *argv[], char *envp[])
 		}
 		else
 			wait(&child_status);
+		}
 	}
 }
 
