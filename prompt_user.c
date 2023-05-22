@@ -15,7 +15,7 @@
  * Return: void
  */
 
-void child(char *command_ptr, char *execve_argv[], char *argv[], char *envp[])
+int child(char *command_ptr, char *execve_argv[], char *argv[], char *envp[])
 {
 	pid_t execve_child_pid;
 	int child_status;
@@ -23,23 +23,21 @@ void child(char *command_ptr, char *execve_argv[], char *argv[], char *envp[])
 	execve_child_pid = fork();
 	if (execve_child_pid == -1)
 	{
-		perror("fork");
 		free(command_ptr);
+		perror("fork");
 		exit(1);
 	}
 	if (execve_child_pid == 0)
 	{
-		execve(execve_argv[0], execve_argv, envp);
 		if (execve(execve_argv[0], execve_argv, envp) == -1)
 		{
 			printf("%s: No such file or directory\n", argv[0]);
+			exit(0);
 		}
-
 	}
 	else
-	{
 		wait(&child_status);
-	}
+	return (WIFEXITED(child_status) && WEXITSTATUS(child_status));
 
 }
 
@@ -53,7 +51,7 @@ void child(char *command_ptr, char *execve_argv[], char *argv[], char *envp[])
 
 void prompt_user(char *argv[], char *envp[])
 {
-	char *command_ptr = NULL, *execve_argv[MAX_COMMANDS];
+	char *command_ptr = NULL, *execve_argv[MAX_COMMANDS], *path, rpath[PATH_SIZE];
 	ssize_t command_char;
 	size_t byte_size = 0;
 	int i;
@@ -66,6 +64,7 @@ void prompt_user(char *argv[], char *envp[])
 		if (command_char == -1)
 		{
 			free(command_ptr);
+			perror("getline");
 			exit(1);
 		}
 		for (i = 0; command_ptr[i] != '\0'; i++)
@@ -78,6 +77,9 @@ void prompt_user(char *argv[], char *envp[])
 			execve_argv[0] = strtok(command_ptr, " ");
 			for (i = 0; execve_argv[i] != NULL;)
 				execve_argv[++i] = strtok(NULL, " ");
+			path = path_checker(*execve_argv, rpath);
+			if (path != NULL)
+				*execve_argv = path;
 			child(command_ptr, execve_argv, argv, envp);
 		}
 	}
