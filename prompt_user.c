@@ -39,6 +39,8 @@ void prompt_user(char *argv[], char *envp[])
 		{
 			if (strcmp("exit", *execve_argv) == 0)
                                 break;
+			if (strcmp("env", *execve_argv) == 0)
+                                printf("%s\n", getenv("PATH"));
 			execve_argv[0] = strtok(command_ptr, " ");
 			for (i = 0; execve_argv[i] != NULL;)
 				execve_argv[++i] = strtok(NULL, " ");
