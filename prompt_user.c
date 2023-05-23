@@ -27,7 +27,6 @@ void prompt_user(char *argv[], char *envp[])
 		if (command_char == -1)
 		{
 			free(command_ptr);
-			perror("getline");
 			exit(1);
 		}
 		for (i = 0; command_ptr[i] != '\0'; i++)
@@ -37,11 +36,11 @@ void prompt_user(char *argv[], char *envp[])
 		}
 		if (*command_ptr != '\0')
 		{
-			if (strcmp("exit", *execve_argv) == 0)
-                                break;
-			if (strcmp("env", *execve_argv) == 0)
-                                printf("%s\n", getenv("PATH"));
 			execve_argv[0] = strtok(command_ptr, " ");
+			if (strcmp("exit", *execve_argv) == 0)
+				break;
+			if (strcmp("env", *execve_argv) == 0)
+				printf("%s\n", getenv("PATH"));
 			for (i = 0; execve_argv[i] != NULL;)
 				execve_argv[++i] = strtok(NULL, " ");
 			path = path_checker(*execve_argv, rpath);
