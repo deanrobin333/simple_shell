@@ -37,6 +37,8 @@ void prompt_user(char *argv[], char *envp[])
 		}
 		if (*command_ptr != '\0')
 		{
+			if (strcmp("exit", *execve_argv) == 0)
+                                break;
 			execve_argv[0] = strtok(command_ptr, " ");
 			for (i = 0; execve_argv[i] != NULL;)
 				execve_argv[++i] = strtok(NULL, " ");
