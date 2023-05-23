@@ -18,12 +18,13 @@ void prompt_user(char *argv[], char *envp[])
 	ssize_t command_char;
 	size_t byte_size = 0;
 	int i;
+	int piped_input = !isatty(0);
 
 	for (;;)
 	{
 		if (isatty(0))
 			printf("#cisfun$ ");
-		command_char = getline(&command_ptr, &byte_size, stdin);
+		command_char = my_getline(&command_ptr, &byte_size, stdin);
 		if (command_char == -1)
 		{
 			free(command_ptr);
@@ -36,19 +37,18 @@ void prompt_user(char *argv[], char *envp[])
 		}
 		if (*command_ptr != '\0')
 		{
-			execve_argv[0] = strtok(command_ptr, " ");
+			my_strtok(command_ptr, " ", execve_argv);
 			if (strcmp("exit", *execve_argv) == 0)
 				break;
 			if (strcmp("env", *execve_argv) == 0)
 				printf("%s\n", getenv("PATH"));
-			for (i = 0; execve_argv[i] != NULL;)
-				execve_argv[++i] = strtok(NULL, " ");
 			path = path_checker(*execve_argv, rpath);
 			if (path != NULL)
 				*execve_argv = path;
 			child(command_ptr, execve_argv, argv, envp);
 		}
+		if (piped_input && command_char < 1)
+			break;
 	}
 	free(command_ptr);
 }
-

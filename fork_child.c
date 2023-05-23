@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <string.h>
 
 /**
  * child - function to create child process
@@ -39,4 +40,3 @@ int child(char *command_ptr, char *execve_argv[], char *argv[], char *envp[])
 	return (WIFEXITED(child_status) && WEXITSTATUS(child_status));
 
 }
-

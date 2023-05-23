@@ -32,3 +32,4 @@ char *path_checker(char *command_ptr, char *rpath)
 	closedir(bin_dir);
 	return (NULL);
 }
+
