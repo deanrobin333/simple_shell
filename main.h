@@ -9,7 +9,7 @@ char *path_checker(char *command_ptr, char *rpath);
 ssize_t my_getline(char **command_ptr, size_t *byte_size, FILE *input);
 int my_strtok(char *command_ptr, const char *delimiters, char *tokens[]);
 char *path_checker2(char *command, char rpath[]);
-void my_env();
+void my_env(void);
 extern char **environ;
 void my_exit(char *argv);
 #endif
