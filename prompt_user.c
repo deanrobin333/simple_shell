@@ -38,8 +38,6 @@ void prompt_user(char *argv[], char *envp[])
 		if (*command_ptr != '\0')
 		{
 			my_strtok(command_ptr, " ", execve_argv);
-			if (strcmp("exit", *execve_argv) == 0)
-				break;
 			if (strcmp("env", *execve_argv) == 0)
 			{
 				my_env();
@@ -49,6 +47,8 @@ void prompt_user(char *argv[], char *envp[])
 			if (path != NULL)
 				*execve_argv = path;
 			child(command_ptr, execve_argv, argv, envp);
+			if (strcmp("exit", *execve_argv) == 0)
+				break;
 		}
 		if (piped_input && command_char < 1)
 			break;

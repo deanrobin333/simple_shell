@@ -11,5 +11,6 @@ int my_strtok(char *command_ptr, const char *delimiters, char *tokens[]);
 char *path_checker2(char *command, char rpath[]);
 void my_env();
 extern char **environ;
+void my_exit();
 #endif
 
