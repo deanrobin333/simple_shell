@@ -24,7 +24,7 @@ int child(char *command_ptr, char *execve_argv[], char *argv[], char *envp[])
 	if (execve_child_pid == -1)
 	{
 		free(command_ptr);
-		return(-1);
+		return (-1);
 	}
 	if (execve_child_pid == 0)
 	{
