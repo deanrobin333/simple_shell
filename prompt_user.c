@@ -18,11 +18,11 @@ void prompt_user(char *argv[], char *envp[])
 	ssize_t command_char;
 	size_t byte_size = 0;
 	int i;
-	int piped_input = !isatty(0);
+	int piped_input = !isatty(STDIN_FILENO);
 
 	for (;;)
 	{
-		if (isatty(0))
+		if (isatty(STDIN_FILENO))
 			printf("#cisfun$ ");
 		command_char = my_getline(&command_ptr, &byte_size, stdin);
 		if (command_char == -1)
