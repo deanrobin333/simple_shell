@@ -1,0 +1,27 @@
+#include <stdio.h>
+#include "main.h"
+#include <stdlib.h>
+#include <signal.h>
+
+/**
+ * signal_handle - handles signal input
+ * @signal_number: signal received
+ * Return: void
+ */
+
+void signal_handler(int signal_number)
+{
+	char **commands = command_ptr;
+		switch (signal_number)
+		{
+			case SIGINT:
+			case SIGQUIT:
+			case SIGTERM:
+				if (commands != NULL)
+					free(commands);
+				exit(EXIT_SUCCESS);
+				break;
+			default:
+				break;
+		}
+}

@@ -3,6 +3,7 @@
 #include "main.h"
 #include <stdlib.h>
 #include <string.h>
+#include <signal.h>
 
 /**
  * prompt_user - prompts the user for a command
@@ -12,7 +13,7 @@
  * to now take in more than one argument
  */
 
-void prompt_user(char *argv[], char *envp[])
+char *prompt_user(char *argv[], char *envp[])
 {
 	char *command_ptr = NULL, *execve_argv[MAX_COMMANDS], *path, rpath[PATH_SIZE];
 	ssize_t command_char;
@@ -25,9 +26,9 @@ void prompt_user(char *argv[], char *envp[])
 		if (isatty(STDIN_FILENO))
 			printf("#cisfun$ ");
 		command_char = my_getline(&command_ptr, &byte_size, stdin);
-		if (command_char == -1)
-		{
-			break; }
+
+		if (command_char == -1 || command_char == 0)
+			break;
 		for (i = 0; command_ptr[i] != '\0'; i++)
 		{
 			if (command_ptr[i] == '\n')
@@ -51,6 +52,5 @@ void prompt_user(char *argv[], char *envp[])
 		if (piped_input && command_char < 1)
 			break;
 	}
-	free(command_ptr);
-	exit(EXIT_SUCCESS);
+	return (command_ptr);
 }
