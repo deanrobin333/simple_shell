@@ -17,6 +17,6 @@ void my_exit(char *argv)
 		exit(status);
 	}
 	else
-		exit(0);
+		exit(EXIT_SUCCESS);
 }
 

@@ -28,7 +28,7 @@ void prompt_user(char *argv[], char *envp[])
 		if (command_char == -1)
 		{
 			free(command_ptr);
-			exit(1); }
+			exit(EXIT_SUCCESS); }
 		for (i = 0; command_ptr[i] != '\0'; i++)
 		{
 			if (command_ptr[i] == '\n')
@@ -53,5 +53,5 @@ void prompt_user(char *argv[], char *envp[])
 			break;
 	}
 	free(command_ptr);
-	exit(0);
+	exit(EXIT_SUCCESS);
 }
