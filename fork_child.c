@@ -21,7 +21,7 @@ int child(char *command_ptr, char *execve_argv[], char *argv[], char *envp[])
 	int child_status;
 
 	execve_child_pid = fork();
-	if (execve_child_pid == -1)
+	if (execve_child_pid < 0)
 	{
 		free(command_ptr);
 		return (-1);

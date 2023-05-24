@@ -28,30 +28,29 @@ void prompt_user(char *argv[], char *envp[])
 		if (command_char == -1)
 		{
 			free(command_ptr);
-			exit(1);
-		}
+			exit(1); }
 		for (i = 0; command_ptr[i] != '\0'; i++)
 		{
 			if (command_ptr[i] == '\n')
-				command_ptr[i] = '\0';
-		}
+				command_ptr[i] = '\0'; }
 		if (*command_ptr != '\0')
 		{
 			my_strtok(command_ptr, " ", execve_argv);
 			if (strcmp("exit", *execve_argv) == 0)
+			{
 				my_exit(execve_argv[1]);
+				break; }
 			if (strcmp("env", *execve_argv) == 0)
 			{
 				my_env();
-				continue;
-			}
+				continue; }
 			path = path_checker(*execve_argv, rpath);
 			if (path != NULL)
 				*execve_argv = path;
-			child(command_ptr, execve_argv, argv, envp);
-		}
+			child(command_ptr, execve_argv, argv, envp); }
 		if (piped_input && command_char < 1)
 			break;
 	}
 	free(command_ptr);
+	exit(0);
 }
