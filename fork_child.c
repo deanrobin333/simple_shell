@@ -31,7 +31,8 @@ int child(char *command_ptr, char *execve_argv[], char *argv[], char *envp[])
 	{
 		if (execve(execve_argv[0], execve_argv, envp) == -1)
 		{
-			printf("%s: %s: not found\n", argv[0], command_ptr);
+			printf("%s: No such file or directory\n", argv[0]);
+			exit(0);
 		}
 	}
 	else
