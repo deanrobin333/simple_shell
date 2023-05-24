@@ -36,10 +36,11 @@ void prompt_user(char *argv[], char *envp[])
 		if (*command_ptr != '\0')
 		{
 			my_strtok(command_ptr, " ", execve_argv);
-			if (strcmp("exit", *execve_argv) == 0)
-			{
+			if (strcmp("exit", *execve_argv) == 0 &&
+					*(execve_argv + 1) != NULL)
 				my_exit(execve_argv[1]);
-				break; }
+			if (strcmp("exit", *execve_argv) == 0)
+				break;
 			if (strcmp("env", *execve_argv) == 0)
 			{
 				my_env();
