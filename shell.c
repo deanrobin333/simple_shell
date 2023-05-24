@@ -10,9 +10,7 @@
 
 int main(int argc, char *argv[], char *envp[])
 {
-	my_setenv("MY_VAR", "Shell_is_tough");
 	if (argc == 1)
 		prompt_user(argv, envp);
-	my_unsetenv("MY_VAR");
 	return (0);
 }
