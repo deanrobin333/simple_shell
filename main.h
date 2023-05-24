@@ -12,5 +12,8 @@ char *path_checker2(char *command, char rpath[]);
 void my_env(void);
 extern char **environ;
 void my_exit(char *argv);
+int my_setenv(const char *variable, const char *value);
+int my_unsetenv(const char *variable);
+void builtin_commands(char *command, char *args[]);
 #endif
 

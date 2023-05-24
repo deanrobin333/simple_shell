@@ -11,17 +11,18 @@
  * Command syntax: setenv VARIABLE VALUE
  * Return: 0
  */
-int my_setenv(const char *variable, const char *value) {
-	if (variable == NULL || value == NULL) {
+int my_setenv(const char *variable, const char *value)
+{
+	if (variable == NULL || value == NULL)
+	{
 		fprintf(stderr, "setenv: Invalid arguments\n");
 		return (-1);
 	}
-
-	if (setenv(variable, value, 1) != 0) {
+	if (setenv(variable, value, 1) != 0)
+	{
 		fprintf(stderr, "setenv: Failed to set environment variable\n");
 		return (-1);
 	}
-
 	return (0);
 }
 
@@ -32,17 +33,18 @@ int my_setenv(const char *variable, const char *value) {
  * Command syntax: unsetenv VARIABLE
  * Return: 0;
  */
-int my_unsetenv(const char *variable) {
-	if (variable == NULL) {
+int my_unsetenv(const char *variable)
+{
+	if (variable == NULL)
+	{
 		fprintf(stderr, "unsetenv: Invalid argument\n");
 		return (-1);
 	}
-
-	if (unsetenv(variable) != 0) {
+	if (unsetenv(variable) != 0)
+	{
 		fprintf(stderr, "unsetenv: Failed to unset environment variable\n");
 		return (-1);
 	}
-
 	return (0);
 }
 
