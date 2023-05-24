@@ -20,8 +20,6 @@ void builtin_commands(char *command, char *args[])
 		else
 			my_exit(NULL);
 	}
-	else if (strcmp("env", command) == 0)
-		my_env();
 	else if (strcmp("setenv", command) == 0)
 		my_setenv(args[0], args[1]);
 	else if (strcmp("unsetenv", command) == 0)
