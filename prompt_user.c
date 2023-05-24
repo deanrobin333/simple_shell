@@ -27,8 +27,7 @@ void prompt_user(char *argv[], char *envp[])
 		command_char = my_getline(&command_ptr, &byte_size, stdin);
 		if (command_char == -1)
 		{
-			free(command_ptr);
-			exit(EXIT_SUCCESS); }
+			break; }
 		for (i = 0; command_ptr[i] != '\0'; i++)
 		{
 			if (command_ptr[i] == '\n')
