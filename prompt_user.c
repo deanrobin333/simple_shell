@@ -28,7 +28,7 @@ void prompt_user(char *argv[], char *envp[])
 		if (command_char == -1)
 		{
 			free(command_ptr);
-			break;
+			exit(1);
 		}
 		for (i = 0; command_ptr[i] != '\0'; i++)
 		{
@@ -39,7 +39,7 @@ void prompt_user(char *argv[], char *envp[])
 		{
 			my_strtok(command_ptr, " ", execve_argv);
 			if (strcmp("exit", *execve_argv) == 0)
-				break;
+				exit(0);
 			if (strcmp("env", *execve_argv) == 0)
 			{
 				my_env();
