@@ -30,7 +30,7 @@ int child(char *command_ptr, char *execve_argv[], char *argv[], char *envp[])
 	{
 		if (execve(execve_argv[0], execve_argv, envp) == -1 &&
 				strcmp("exit", *execve_argv) == 0)
-			my_exit();
+			return (WIFEXITED(child_status) && WEXITSTATUS(child_status));
 		if (execve(execve_argv[0], execve_argv, envp) == -1)
 		{
 			printf("%s: No such file or directory\n", argv[0]);
