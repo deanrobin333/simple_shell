@@ -41,7 +41,10 @@ void prompt_user(char *argv[], char *envp[])
 			if (strcmp("exit", *execve_argv) == 0)
 				break;
 			if (strcmp("env", *execve_argv) == 0)
-				printf("%s\n", getenv("PATH"));
+			{
+				my_env();
+				continue;
+			}
 			path = path_checker(*execve_argv, rpath);
 			if (path != NULL)
 				*execve_argv = path;
