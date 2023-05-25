@@ -43,8 +43,7 @@ void prompt_user(char *argv[], char *envp[])
 				break;
 			if (strcmp("env", *execve_argv) == 0)
 			{
-				my_env();
-				continue; }
+				my_env(); }
 			path = path_checker(*execve_argv, rpath);
 			if (path != NULL)
 				*execve_argv = path;
