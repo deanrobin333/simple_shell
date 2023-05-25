@@ -3,7 +3,7 @@
 #define MAX_COMMANDS 10
 #define PATH_SIZE 40
 
-void prompt_user(char **, char **);
+char *prompt_user(char **, char **);
 int child(char *command_ptr, char *execve_argv[], char *argv[], char *envp[]);
 char *path_checker(char *command_ptr, char *rpath);
 ssize_t my_getline(char **command_ptr, size_t *byte_size, FILE *input);

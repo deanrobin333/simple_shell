@@ -13,7 +13,7 @@
  * to now take in more than one argument
  */
 
-void prompt_user(char *argv[], char *envp[])
+char *prompt_user(char *argv[], char *envp[])
 {
 	char *command_ptr = NULL, *execve_argv[MAX_COMMANDS], *path, rpath[PATH_SIZE];
 	ssize_t command_char;
@@ -27,20 +27,20 @@ void prompt_user(char *argv[], char *envp[])
 			printf("#cisfun$ ");
 		command_char = my_getline(&command_ptr, &byte_size, stdin);
 
-		if (command_char == -1)
+		if (command_char == -1 || command_char == 0)
 			break;
 		for (i = 0; command_ptr[i] != '\0'; i++)
 		{
 			if (command_ptr[i] == '\n')
 				command_ptr[i] = '\0'; }
+		if (strcmp("exit", *command_ptr) == 0)
+			break;
 		if (*command_ptr != '\0')
 		{
 			my_strtok(command_ptr, " ", execve_argv);
 			if (strcmp("exit", *execve_argv) == 0 &&
 					*(execve_argv + 1) != NULL)
 				my_exit(execve_argv[1]);
-			if (strcmp("exit", *execve_argv) == 0)
-				break;
 			if (strcmp("env", *execve_argv) == 0)
 			{
 				my_env();
@@ -52,6 +52,5 @@ void prompt_user(char *argv[], char *envp[])
 		if (piped_input && command_char < 1)
 			break;
 	}
-	free(command_ptr);
-	exit(EXIT_SUCCESS);
+	return (command_ptr);
 }

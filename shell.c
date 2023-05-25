@@ -15,7 +15,7 @@ void signal_handler(int signal_number)
 {
 	if (signal_number)
 	{
-		exit(EXIT_SUCCESS);
+		return;
 	}
 }
 
@@ -29,10 +29,15 @@ void signal_handler(int signal_number)
 
 int main(int argc, char *argv[], char *envp[])
 {
-
-	signal(SIGINT, signal_handler);
+	char *commands;
 
 	if (argc == 1)
-		prompt_user(argv, envp);
-	return (0);
+		commands = prompt_user(argv, envp);
+
+	if (commands != NULL)
+		free(commands);
+	signal(SIGINT, signal_handler);
+	signal(SIGQUIT, signal_handler);
+	signal(SIGTERM, signal_handler);
+	exit(EXIT_SUCCESS);
 }
