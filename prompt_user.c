@@ -38,12 +38,15 @@ void prompt_user(char *argv[], char *envp[])
 			my_strtok(command_ptr, " ", execve_argv);
 			if (strcmp("exit", *execve_argv) == 0 &&
 					*(execve_argv + 1) != NULL)
+			{
 				my_exit(execve_argv[1]);
+				continue; }
 			if (strcmp("exit", *execve_argv) == 0)
 				break;
 			if (strcmp("env", *execve_argv) == 0)
 			{
-				my_env(); }
+				my_env();
+				continue; }
 			path = path_checker(*execve_argv, rpath);
 			if (path != NULL)
 				*execve_argv = path;

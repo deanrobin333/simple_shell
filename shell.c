@@ -31,8 +31,6 @@ int main(int argc, char *argv[], char *envp[])
 {
 
 	signal(SIGINT, signal_handler);
-	signal(SIGQUIT, signal_handler);
-	signal(SIGTERM, signal_handler);
 
 	if (argc == 1)
 		prompt_user(argv, envp);
