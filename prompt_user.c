@@ -27,7 +27,7 @@ void prompt_user(char *argv[], char *envp[])
 			printf("#cisfun$ ");
 		command_char = my_getline(&command_ptr, &byte_size, stdin);
 
-		if (command_char == -1 || command_char == 0)
+		if (command_char == -1)
 			break;
 		for (i = 0; command_ptr[i] != '\0'; i++)
 		{
@@ -38,9 +38,7 @@ void prompt_user(char *argv[], char *envp[])
 			my_strtok(command_ptr, " ", execve_argv);
 			if (strcmp("exit", *execve_argv) == 0 &&
 					*(execve_argv + 1) != NULL)
-			{
 				my_exit(execve_argv[1]);
-				continue; }
 			if (strcmp("exit", *execve_argv) == 0)
 				break;
 			if (strcmp("env", *execve_argv) == 0)
