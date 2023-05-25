@@ -13,7 +13,7 @@
  * to now take in more than one argument
  */
 
-char *prompt_user(char *argv[], char *envp[])
+void prompt_user(char *argv[], char *envp[])
 {
 	char *command_ptr = NULL, *execve_argv[MAX_COMMANDS], *path, rpath[PATH_SIZE];
 	ssize_t command_char;
@@ -52,5 +52,6 @@ char *prompt_user(char *argv[], char *envp[])
 		if (piped_input && command_char < 1)
 			break;
 	}
-	return (command_ptr);
+	free(command_ptr);
+	exit(EXIT_SUCCESS);
 }
