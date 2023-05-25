@@ -33,7 +33,7 @@ char *prompt_user(char *argv[], char *envp[])
 		{
 			if (command_ptr[i] == '\n')
 				command_ptr[i] = '\0'; }
-		if (strcmp("exit", *command_ptr) == 0)
+		if (strcmp("exit", command_ptr) == 0)
 			break;
 		if (*command_ptr != '\0')
 		{
